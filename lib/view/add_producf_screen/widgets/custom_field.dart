@@ -4,8 +4,8 @@ import 'package:izone/constants/constant.dart';
 
 Column customField2(
     {required String label,
-    required double height,
-    required double width,
+    double? height,
+    double? width,
     required bool num,
     TextEditingController? controller,
     required bool max}) {

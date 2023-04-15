@@ -104,9 +104,10 @@ class _addProductState extends State<addProduct> {
                           max: true,
                           num: false,
                           controller: description_controller,
-                          height: sHeight! / 5,
-                          width: sWidth! / 1.05,
-                          label: "Description")
+                          label: "Description"),
+                      SizedBox(
+                        height: 50,
+                      )
                     ],
                   ),
                 ),

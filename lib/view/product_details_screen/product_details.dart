@@ -94,9 +94,10 @@ class _productDetailsState extends State<productDetails> {
                           content: widget.data["description"],
                           max: true,
                           num: false,
-                          height: sHeight! / 5,
-                          width: sWidth! / 1.05,
-                          label: "Description")
+                          label: "Description"),
+                      SizedBox(
+                        height: 50,
+                      )
                     ],
                   ),
                 ),
@@ -231,8 +232,8 @@ class _productDetailsState extends State<productDetails> {
 
   Column customField2(
       {required String label,
-      required double height,
-      required double width,
+      double? height,
+      double? width,
       required bool num,
       required bool max,
       required String content}) {
@@ -311,7 +312,7 @@ class _productDetailsState extends State<productDetails> {
       minLines: 1,
       initialValue: content,
       readOnly: true,
-      maxLines: max ? 6 : 1,
+      maxLines: max ? 50 : 1,
       keyboardType: num ? TextInputType.number : TextInputType.text,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(

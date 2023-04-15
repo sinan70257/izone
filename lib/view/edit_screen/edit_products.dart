@@ -122,9 +122,10 @@ class _editProductState extends State<editProduct> {
                                   text: widget.product["description"]),
                           max: true,
                           num: false,
-                          height: sHeight! / 5,
-                          width: sWidth! / 1.05,
-                          label: "Description")
+                          label: "Description"),
+                      const SizedBox(
+                        height: 50,
+                      )
                     ],
                   ),
                 ),
@@ -153,8 +154,8 @@ class _editProductState extends State<editProduct> {
 
   Column customField2(
       {required String label,
-      required double height,
-      required double width,
+      double? height,
+      double? width,
       required bool num,
       required TextEditingController controller,
       required bool max}) {
@@ -188,6 +189,7 @@ class _editProductState extends State<editProduct> {
             size: 30,
           ),
           onPressed: () {
+            clear();
             Navigator.of(context).pop();
           },
         ),
@@ -229,7 +231,7 @@ class _editProductState extends State<editProduct> {
       onChanged: (value) {},
       minLines: 1,
       controller: controller,
-      maxLines: max ? 6 : 1,
+      maxLines: max ? 50 : 1,
       keyboardType: num ? TextInputType.number : TextInputType.text,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(

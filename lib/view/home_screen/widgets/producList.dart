@@ -88,99 +88,106 @@ class _productListState extends State<productList> {
                         return snapshot.data!.isEmpty
                             ? Text('list empty')
                             : Expanded(
-                                child: ListView.builder(
-                                    itemCount: snapshot.data.length,
-                                    shrinkWrap: true,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      final product = data[index];
-                                      return Slidable(
-                                        endActionPane: ActionPane(
-                                            motion: const BehindMotion(),
-                                            children: [
-                                              SlidableAction(
-                                                onPressed: (context) async {
-                                                  await deleteProduct(
-                                                      product['id']);
-                                                  setState(() {
-                                                    stream = getProducts();
-                                                  });
-                                                },
-                                                backgroundColor: Colors.red,
-                                                icon: Icons.close_rounded,
-                                                label: 'Delete',
-                                              ),
-                                              Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: SlidableAction(
-                                                  onPressed: (context) async {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              editProduct(
-                                                                  product:
-                                                                      product),
-                                                        ));
-                                                  },
-                                                  backgroundColor: Colors.blue,
-                                                  icon: Icons.edit_rounded,
-                                                  label: 'Edit',
-                                                ),
-                                              ),
-                                            ]),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: sWidth! / 30),
-                                          height: sHeight! / 10,
-                                          width: sWidth! / 1.01,
-                                          child: Center(
-                                            child: ListTile(
-                                                onTap: () {
-                                                  Navigator.of(context)
-                                                      .push(MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        productDetails(
-                                                            data: product),
-                                                  ));
-                                                },
-                                                tileColor: Kgrey,
-                                                contentPadding:
-                                                    EdgeInsets.all(10),
-                                                shape: RoundedRectangleBorder(
-                                                  //<-- SEE HERE
-                                                  side: BorderSide.none,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                leading: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  child: Image.network(
-                                                      product["images"][0]),
-                                                ),
-                                                trailing: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right: sWidth! / 20),
-                                                  child: Text(
-                                                    product["quantity"]
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                child: ListView(
+                                  physics: BouncingScrollPhysics(),
+                                  children: [
+                                    ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: snapshot.data.length,
+                                        shrinkWrap: true,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          final product = data[index];
+                                          return Slidable(
+                                            endActionPane: ActionPane(
+                                                motion: const BehindMotion(),
+                                                children: [
+                                                  SlidableAction(
+                                                    onPressed: (context) async {
+                                                      await deleteProduct(
+                                                          product['id']);
+                                                      setState(() {
+                                                        stream = getProducts();
+                                                      });
+                                                    },
+                                                    backgroundColor: Colors.red,
+                                                    icon: Icons.close_rounded,
+                                                    label: 'Delete',
                                                   ),
-                                                ),
-                                                title: Text(product["name"])),
-                                          ),
-                                        ),
-                                      );
-                                    }),
+                                                  SlidableAction(
+                                                    onPressed: (context) async {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                editProduct(
+                                                                    product:
+                                                                        product),
+                                                          ));
+                                                    },
+                                                    backgroundColor: Kblue,
+                                                    icon: Icons.edit_rounded,
+                                                    label: 'Edit',
+                                                  ),
+                                                ]),
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: sWidth! / 30),
+                                              height: sHeight! / 10,
+                                              width: sWidth! / 1.01,
+                                              child: Center(
+                                                child: ListTile(
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .push(
+                                                              MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            productDetails(
+                                                                data: product),
+                                                      ));
+                                                    },
+                                                    tileColor: Kgrey,
+                                                    contentPadding:
+                                                        EdgeInsets.all(10),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      //<-- SEE HERE
+                                                      side: BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    leading: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      child: Image.network(
+                                                          product["images"][0]),
+                                                    ),
+                                                    trailing: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          right: sWidth! / 20),
+                                                      child: Text(
+                                                        product["quantity"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    title:
+                                                        Text(product["name"])),
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                    SizedBox(
+                                      height: 50,
+                                    )
+                                  ],
+                                ),
                               );
                       }
                     }
