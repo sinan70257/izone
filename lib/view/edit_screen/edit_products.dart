@@ -7,6 +7,7 @@ import 'package:izone/constants/constant.dart';
 import 'package:izone/model/product.dart';
 
 import 'package:izone/view/add_producf_screen/controllers/controllers.dart';
+import 'package:izone/view/home_screen/home_screen.dart';
 
 class editProduct extends StatefulWidget {
   const editProduct({super.key, this.product});
@@ -252,18 +253,61 @@ class _editProductState extends State<editProduct> {
               borderRadius: BorderRadius.all(Radius.circular(8))),
         ),
         onPressed: () {
-          Product myproduct = Product(
-              images: imgurl,
-              quantity: qty_controller.text,
-              name: name_controller.text,
-              category: category!,
-              price: price_controller.text,
-              color: color_controller.text,
-              variant: variant!,
-              description: description_controller.text);
-          myproduct.updateToFirestore(product);
-          clear();
-          Navigator.of(context).pop();
+          if (imgurl.isEmpty ||
+              qty_controller.text.isEmpty ||
+              name_controller.text.isEmpty ||
+              category == null ||
+              variant == null ||
+              price_controller.text.isEmpty ||
+              color_controller.text.isEmpty ||
+              description_controller.text.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text(
+                "Enter all data !",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 1),
+              animation: AlwaysStoppedAnimation(100),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+            ));
+          } else {
+            ScaffoldMessenger.of(ctx!).showSnackBar(SnackBar(
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Product edited successfully",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Icon(
+                    Icons.done,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 1),
+              animation: const AlwaysStoppedAnimation(100),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+            ));
+            Product myproduct = Product(
+                images: imgurl,
+                quantity: qty_controller.text,
+                name: name_controller.text,
+                category: category!,
+                price: price_controller.text,
+                color: color_controller.text,
+                variant: variant!,
+                description: description_controller.text);
+            myproduct.updateToFirestore(product);
+            clear();
+            Navigator.of(context).pop();
+          }
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

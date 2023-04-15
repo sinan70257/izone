@@ -104,6 +104,45 @@ class _productListState extends State<productList> {
                                                 children: [
                                                   SlidableAction(
                                                     onPressed: (context) async {
+                                                      ScaffoldMessenger.of(ctx!)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              "Product Deleted ",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            Icon(
+                                                              Icons.done,
+                                                              color:
+                                                                  Colors.white,
+                                                            )
+                                                          ],
+                                                        ),
+                                                        backgroundColor:
+                                                            Colors.green,
+                                                        duration: Duration(
+                                                            seconds: 1),
+                                                        animation:
+                                                            AlwaysStoppedAnimation(
+                                                                100),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5)),
+                                                      ));
                                                       await deleteProduct(
                                                           product['id']);
                                                       setState(() {

@@ -48,6 +48,27 @@ Widget customElevatedBotton({required String label, BuildContext? ctx}) {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ));
         } else {
+          ScaffoldMessenger.of(ctx!).showSnackBar(SnackBar(
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "Product added successfully",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.done,
+                  color: Colors.white,
+                )
+              ],
+            ),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 1),
+            animation: const AlwaysStoppedAnimation(100),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          ));
           Product myproduct = Product(
               images: imgurl,
               quantity: qty_controller.text,
@@ -60,7 +81,7 @@ Widget customElevatedBotton({required String label, BuildContext? ctx}) {
           myproduct.addToFirestore();
           clear();
           Navigator.push(
-              ctx!,
+              ctx,
               MaterialPageRoute(
                 builder: (context) => homeScreen(),
               ));
