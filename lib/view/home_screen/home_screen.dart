@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:izone/view/add_producf_screen/add_products.dart';
-import 'package:izone/view/add_producf_screen/controllers/controllers.dart';
+import 'package:izone/model/product.dart';
 import 'package:izone/view/home_screen/widgets/orders_list.dart';
 import 'package:izone/view/home_screen/widgets/appbar.dart';
 import 'package:izone/view/home_screen/widgets/producList.dart';
@@ -18,41 +15,7 @@ final List<Tab> myTabs = <Tab>[
 ];
 final List<Widget> myTabContents = <Widget>[productList(), ordersList()];
 
-Align floatingButton(BuildContext ctx) {
-  return Align(
-    alignment: Alignment.bottomCenter,
-    child: SizedBox(
-      height: sHeight! / 20,
-      width: sWidth! / 1.1,
-      child: Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: customElevatedBotton(
-              label: "Add new product", logo: Icons.add, ctx: ctx)),
-    ),
-  );
-}
-
-Widget customElevatedBotton(
-    {required String label,
-    required IconData logo,
-    required BuildContext ctx}) {
-  return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8))),
-      ),
-      onPressed: () {
-        log(variant.toString());
-        Navigator.of(ctx).push(MaterialPageRoute(
-          builder: (context) => addProduct(),
-        ));
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Icon(logo), Text(" $label")],
-      ));
-}
-
+// ignore: camel_case_types
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});
 
@@ -60,6 +23,7 @@ class homeScreen extends StatefulWidget {
   State<homeScreen> createState() => _homeScreenState();
 }
 
+// ignore: camel_case_types
 class _homeScreenState extends State<homeScreen> {
   StreamSubscription? _subscription;
   @override
@@ -116,11 +80,4 @@ class _homeScreenState extends State<homeScreen> {
       isloggedIn1 = false;
     });
   }
-}
-
-Stream getProducts() async* {
-  final QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection('products').get();
-  final List<DocumentSnapshot> docs = querySnapshot.docs;
-  yield docs;
 }

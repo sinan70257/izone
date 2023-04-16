@@ -1,11 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:izone/constants/constant.dart';
+import 'package:izone/model/product.dart';
 import 'package:izone/view/edit_screen/edit_products.dart';
+import 'package:izone/view/home_screen/functions/delete.dart';
 import 'package:izone/view/home_screen/home_screen.dart';
+import 'package:izone/view/home_screen/widgets/cutom_button.dart';
 import 'package:izone/view/product_details_screen/product_details.dart';
 
+// ignore: camel_case_types
 class productList extends StatefulWidget {
   const productList({
     super.key,
@@ -15,6 +18,7 @@ class productList extends StatefulWidget {
   State<productList> createState() => _productListState();
 }
 
+// ignore: camel_case_types
 class _productListState extends State<productList> {
   late Stream stream;
   @override
@@ -230,27 +234,13 @@ class _productListState extends State<productList> {
                               );
                       }
                     }
-                    return Text('Error');
+                    return const Text('Error');
                   }),
             ],
           ),
-          floatingButton(ctx!)
+          const floatingButton(),
         ],
       ),
     );
-  }
-}
-
-Future<void> deleteProduct(String id) async {
-  try {
-    // Get a reference to the product document in the database
-    final productRef =
-        FirebaseFirestore.instance.collection('products').doc(id);
-
-    // Delete the product document from the database
-    await productRef.delete();
-    print('Product with ID $id has been deleted successfully!');
-  } catch (error) {
-    print('Error deleting product with ID $id: $error');
   }
 }

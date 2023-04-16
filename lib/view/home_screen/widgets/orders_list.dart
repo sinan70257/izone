@@ -34,8 +34,8 @@ class ordersList extends StatelessWidget {
                           side: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        title: Padding(
-                          padding: const EdgeInsets.only(left: 10.0, top: 10),
+                        title: const Padding(
+                          padding: EdgeInsets.only(left: 10.0, top: 10),
                           child: Text(
                             "",
                             style: TextStyle(

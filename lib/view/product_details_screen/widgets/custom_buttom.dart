@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:izone/constants/constant.dart';
-import 'package:izone/view/add_producf_screen/add_products.dart';
+import 'package:izone/view/edit_screen/edit_products.dart';
 
-class floatingButton extends StatelessWidget {
-  const floatingButton({super.key});
+class floatingButton extends StatefulWidget {
+  const floatingButton({super.key, this.data});
+  final data;
 
+  @override
+  State<floatingButton> createState() => _floatingButtonState();
+}
+
+class _floatingButtonState extends State<floatingButton> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -15,25 +21,22 @@ class floatingButton extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: customElevatedBotton(
-              ctx: context,
-              label: "Add new product",
+              label: "Edit",
             )),
       ),
     );
   }
 
-  Widget customElevatedBotton({required String label, BuildContext? ctx}) {
+  Widget customElevatedBotton({required String label}) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8))),
         ),
         onPressed: () {
-          Navigator.push(
-              ctx!,
-              MaterialPageRoute(
-                builder: (context) => addProduct(),
-              ));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => editProduct(product: widget.data),
+          ));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

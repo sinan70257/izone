@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:izone/view/add_producf_screen/controllers/controllers.dart';
+import 'package:izone/controller/controllers.dart';
 
 class Product {
   String name;
@@ -77,4 +77,11 @@ void clear() {
   category = null;
   variant = null;
   imgurl.clear();
+}
+
+Stream getProducts() async* {
+  final QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection('products').get();
+  final List<DocumentSnapshot> docs = querySnapshot.docs;
+  yield docs;
 }
