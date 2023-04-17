@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:izone/constants/constant.dart';
 import 'package:izone/model/product.dart';
-import 'package:izone/view/add_producf_screen/controllers/controllers.dart';
+import 'package:izone/controller/controllers.dart';
 import 'package:izone/view/home_screen/home_screen.dart';
 
 Align floatingButton(BuildContext ctx) {
@@ -36,14 +38,14 @@ Widget customElevatedBotton({required String label, BuildContext? ctx}) {
             color_controller.text.isEmpty ||
             description_controller.text.isEmpty) {
           ScaffoldMessenger.of(ctx!).showSnackBar(SnackBar(
-            content: Text(
+            content: const Text(
               "Enter all data !",
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.red,
-            duration: Duration(seconds: 1),
-            animation: AlwaysStoppedAnimation(100),
+            duration: const Duration(seconds: 1),
+            animation: const AlwaysStoppedAnimation(100),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           ));
@@ -79,6 +81,7 @@ Widget customElevatedBotton({required String label, BuildContext? ctx}) {
               variant: variant!,
               description: description_controller.text);
           myproduct.addToFirestore();
+
           clear();
           Navigator.push(
               ctx,

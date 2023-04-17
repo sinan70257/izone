@@ -28,7 +28,7 @@ class _imageSliderState extends State<imageSlider> {
         options: CarouselOptions(
           pageSnapping: true,
           autoPlay: true,
-          aspectRatio: 2.0,
+          aspectRatio: 1.0,
           enlargeCenterPage: true,
           onPageChanged: (index, reason) {
             setState(() {
@@ -45,14 +45,13 @@ class _imageSliderState extends State<imageSlider> {
   Container imageCard(String image) {
     return Container(
       margin: EdgeInsets.all(5),
-      height: sWidth! / 2,
-      width: sWidth! / 2,
-      decoration:
-          BoxDecoration(color: Kgrey, borderRadius: BorderRadius.circular(10)),
+      height: sWidth! / 1.2,
+      width: sWidth! / 1.2,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       child: Center(
           child: Image.network(
         image,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
       )),
     );
   }

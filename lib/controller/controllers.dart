@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,6 +15,7 @@ TextEditingController category_controller = TextEditingController();
 List<String> imgurl = [];
 String? category;
 String? variant;
+int? total;
 
 Future<String> uploadImage(File imageFile, List<String> imgUrl) async {
   final uniqueImgName = DateTime.now();
@@ -26,6 +28,7 @@ Future<String> uploadImage(File imageFile, List<String> imgUrl) async {
   final downloadURL = await imgToUpload.getDownloadURL();
   print('Image uploaded at $downloadURL');
   imgUrl.add(downloadURL);
+  log(imgUrl.toString());
   return downloadURL;
 }
 
@@ -36,6 +39,7 @@ Future<String> updateImage(File imageFile, String imgUrl) async {
   await imgToUpload.putFile(imageFile);
   final downloadURL = await imgToUpload.getDownloadURL();
   print('Image uploaded at $downloadURL');
+  log(imgUrl.toString());
 
   return downloadURL;
 }

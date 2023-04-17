@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:izone/constants/constant.dart';
 import 'package:izone/controller/controllers.dart';
@@ -23,6 +24,7 @@ class _editProductState extends State<editProduct> {
     for (var i = 0; i < widget.product["images"].length; i++) {
       imgurl.add(widget.product["images"][i]);
     }
+    log(imgurl.toString());
     sHeight = MediaQuery.of(context).size.height;
     sWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -33,6 +35,7 @@ class _editProductState extends State<editProduct> {
             children: [
               Center(
                 child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

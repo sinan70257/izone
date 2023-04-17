@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:izone/constants/constant.dart';
-import 'package:izone/view/add_producf_screen/controllers/controllers.dart';
+import 'package:izone/controller/controllers.dart';
 
 class imgCard extends StatefulWidget {
   const imgCard({super.key});

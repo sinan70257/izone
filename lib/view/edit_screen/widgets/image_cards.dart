@@ -69,6 +69,7 @@ class _imgCardState extends State<imgCard> {
           });
 
           uploadImage(File(pickedFile.path), imgurl);
+
           // imgUrl.clear();
         }
       },

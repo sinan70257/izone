@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:izone/constants/constant.dart';
+import 'package:izone/model/product.dart';
 import 'package:izone/view/add_producf_screen/add_products.dart';
 
 class floatingButton extends StatelessWidget {
@@ -29,6 +30,7 @@ class floatingButton extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8))),
         ),
         onPressed: () {
+          clear();
           Navigator.push(
               ctx!,
               MaterialPageRoute(
