@@ -45,6 +45,27 @@ class Product {
     await docRef.set(toMap());
   }
 
+  Future<void> addToFirestoreFeature() async {
+    final ref = FirebaseFirestore.instance.collection('');
+    final docRef = ref.doc();
+    String id = docRef.id;
+    Map<String, dynamic> toMap() {
+      return {
+        // "id": id,
+        // 'name': name,
+        // 'category': category,
+        // 'price': price,
+        // 'color': color,
+        // 'variant': variant,
+        // 'description': description,
+        // 'quantity': quantity,
+        'images': images,
+      };
+    }
+
+    await docRef.set(toMap());
+  }
+
   Future<void> updateToFirestore(product) async {
     final ref =
         FirebaseFirestore.instance.collection('products').doc(product["id"]);
@@ -84,4 +105,29 @@ Stream getProducts() async* {
       await FirebaseFirestore.instance.collection('products').get();
   final List<DocumentSnapshot> docs = querySnapshot.docs;
   yield docs;
+}
+
+class f {
+  List<String> fimg;
+  f({required this.fimg});
+  Future<void> addToFirestoreFeature() async {
+    final ref = FirebaseFirestore.instance.collection('feature');
+    final docRef = ref.doc("images");
+    // String id = docRef.id;
+    Map<String, dynamic> toMap() {
+      return {
+        // "id": id,
+        // 'name': name,
+        // 'category': category,
+        // 'price': price,
+        // 'color': color,
+        // 'variant': variant,
+        // 'description': description,
+        // 'quantity': quantity,
+        'images': fimg,
+      };
+    }
+
+    await docRef.set(toMap());
+  }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:izone/model/product.dart';
+import 'package:izone/view/feature_imge_screen/feature_screen.dart';
 import 'package:izone/view/home_screen/widgets/orders_list.dart';
 import 'package:izone/view/home_screen/widgets/appbar.dart';
 import 'package:izone/view/home_screen/widgets/producList.dart';
@@ -48,25 +49,50 @@ class _homeScreenState extends State<homeScreen> {
       length: 2,
       child: Scaffold(
         appBar: customAppbar(context),
-        body: Column(
+        body: Stack(
           children: [
-            Container(
-              height: 40,
-              color: Colors.white,
-              child: TabBar(
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: sWidth! / 19),
-                indicatorSize: TabBarIndicatorSize.label,
-                labelColor: Colors.black,
-                tabs: myTabs,
-                indicatorColor: Colors.black,
-              ),
+            Column(
+              children: [
+                Container(
+                  height: 40,
+                  color: Colors.white,
+                  child: TabBar(
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: sWidth! / 19),
+                    indicatorSize: TabBarIndicatorSize.label,
+                    labelColor: Colors.black,
+                    tabs: myTabs,
+                    indicatorColor: Colors.black,
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    children: myTabContents,
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: myTabContents,
+            Positioned(
+              left: sWidth! / 1.25,
+              top: sHeight! / 1.48,
+              child: SizedBox(
+                height: 60,
+                width: 60,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50))),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => featureImage(),
+                        ));
+                  },
+                  child: Icon(Icons.add_photo_alternate_rounded),
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
